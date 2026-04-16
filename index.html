@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCS Performance & Compensation Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .plotly-container {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-blue-200">
+    <!-- Palette: Vibrant Professional (Blue/Orange). Plan: Header -> Current Status -> Band Definitions -> Salary Projections -> 10Yr Historical Trend -> Employee Distribution Curve. Visualizations: Chart.js Bar (Compare), Chart.js Line (Change), Plotly ScatterGL (Distribution). CONFIRMATION: NEITHER Mermaid JS NOR SVG were used anywhere in the output. -->
+
+    <header class="bg-blue-700 text-white py-14 px-6 shadow-lg relative overflow-hidden">
+        <div class="absolute top-[-50px] right-[-50px] text-9xl opacity-10">📈</div>
+        <div class="absolute bottom-[-20px] left-[-20px] text-8xl opacity-10">📊</div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="inline-block bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">Compensation Analysis</div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight">Performance Band & Hike Trajectory</h1>
+            <p class="text-xl md:text-2xl font-light text-blue-100 max-w-3xl">Comprehensive review of the appraisal structure, historical trends, and personalized salary projections.</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <section class="mb-16 -mt-20 relative z-20">
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between border-t-8 border-orange-500">
+                <div class="mb-6 md:mb-0 text-center md:text-left">
+                    <p class="text-sm uppercase tracking-widest text-slate-400 font-bold mb-1">Current Base Profile</p>
+                    <h2 class="text-5xl md:text-6xl font-black text-blue-800 tracking-tighter">₹7.58 <span class="text-3xl text-slate-500 font-medium">LPA</span></h2>
+                </div>
+                <div class="flex items-center space-x-6 text-center md:text-right">
+                    <div class="bg-slate-50 p-4 rounded-xl shadow-inner hidden sm:block">
+                        <div class="text-4xl mb-2">🧑‍💻</div>
+                        <p class="text-xs text-slate-500 font-bold uppercase">Role</p>
+                        <p class="font-bold text-slate-800">System Engineer</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl shadow-inner">
+                        <div class="text-4xl mb-2">🏷️</div>
+                        <p class="text-xs text-slate-500 font-bold uppercase">Grade</p>
+                        <p class="font-bold text-slate-800 text-xl">C1</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <div class="mb-8 max-w-3xl">
+                <h3 class="text-3xl font-bold text-slate-800 mb-3 flex items-center gap-3">
+                    <span class="text-orange-500">1.</span> The Appraisal Framework
+                </h3>
+                <p class="text-slate-600 text-lg leading-relaxed">
+                    The annual appraisal process categorizes employee performance into four distinct bands. These bands dictate the percentage of the annual hike, reflecting overall contribution, skill enhancement, and project delivery success during the financial year.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="bg-white rounded-xl p-6 shadow-md border-b-4 border-emerald-500 hover:shadow-xl transition-shadow duration-300">
+                    <div class="text-4xl mb-4">🏆</div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-1">Band A</h4>
+                    <p class="text-emerald-600 font-semibold mb-3">Exceptional Performer</p>
+                    <p class="text-sm text-slate-600 mb-4 h-20">Consistently exceeds all expectations. Takes proactive leadership, delivers critical value, and masters new competencies.</p>
+                    <div class="bg-emerald-50 rounded-lg p-3 text-center">
+                        <span class="block text-xs uppercase text-emerald-600 font-bold mb-1">Estimated Hike</span>
+                        <span class="text-2xl font-black text-emerald-700">10% - 12%</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-md border-b-4 border-blue-500 hover:shadow-xl transition-shadow duration-300">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-1">Band B</h4>
+                    <p class="text-blue-600 font-semibold mb-3">Exceeds Expectations</p>
+                    <p class="text-sm text-slate-600 mb-4 h-20">Meets all and exceeds some goals. Highly dependable, consistent quality of work, and solid team contributor.</p>
+                    <div class="bg-blue-50 rounded-lg p-3 text-center">
+                        <span class="block text-xs uppercase text-blue-600 font-bold mb-1">Estimated Hike</span>
+                        <span class="text-2xl font-black text-blue-700">7% - 9%</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-md border-b-4 border-amber-500 hover:shadow-xl transition-shadow duration-300">
+                    <div class="text-4xl mb-4">⚖️</div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-1">Band C</h4>
+                    <p class="text-amber-600 font-semibold mb-3">Meets Expectations</p>
+                    <p class="text-sm text-slate-600 mb-4 h-20">Delivers what is asked. Meets baseline project requirements but lacks proactive initiative beyond defined scope.</p>
+                    <div class="bg-amber-50 rounded-lg p-3 text-center">
+                        <span class="block text-xs uppercase text-amber-600 font-bold mb-1">Estimated Hike</span>
+                        <span class="text-2xl font-black text-amber-700">4% - 6%</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-md border-b-4 border-red-500 hover:shadow-xl transition-shadow duration-300">
+                    <div class="text-4xl mb-4">⚠️</div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-1">Band D</h4>
+                    <p class="text-red-600 font-semibold mb-3">Needs Improvement</p>
+                    <p class="text-sm text-slate-600 mb-4 h-20">Fails to meet baseline expectations. Requires a Performance Improvement Plan (PIP). Immediate corrective action needed.</p>
+                    <div class="bg-red-50 rounded-lg p-3 text-center">
+                        <span class="block text-xs uppercase text-red-600 font-bold mb-1">Estimated Hike</span>
+                        <span class="text-2xl font-black text-red-700">0%</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
+            
+            <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <span class="text-orange-500 text-3xl">💰</span> Projected Compensation
+                    </h3>
+                    <p class="text-slate-600 text-sm">
+                        Calculated impact of each performance band on your current baseline of 7.58 LPA, utilizing median hike percentages for the C1 grade.
+                    </p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="projectionChart"></canvas>
+                </div>
+                <div class="mt-4 grid grid-cols-2 gap-4">
+                    <div class="bg-slate-50 rounded p-3 text-center">
+                        <p class="text-xs text-slate-500 uppercase font-bold">Max Upside</p>
+                        <p class="text-lg font-black text-emerald-600">+ ₹91,000</p>
+                    </div>
+                    <div class="bg-slate-50 rounded p-3 text-center">
+                        <p class="text-xs text-slate-500 uppercase font-bold">Base Result</p>
+                        <p class="text-lg font-black text-amber-600">+ ₹30,000</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <span class="text-orange-500 text-3xl">📅</span> Macro Historical Trends
+                    </h3>
+                    <p class="text-slate-600 text-sm">
+                        Average organizational hike percentages over the last 10 years. Notice the volatility introduced by global economic events.
+                    </p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="historicalChart"></canvas>
+                </div>
+                <div class="mt-4 bg-blue-50 border-l-4 border-blue-500 p-3 rounded-r">
+                    <p class="text-sm text-blue-800 font-medium flex items-start gap-2">
+                        <span>💡</span>
+                        <span>Post-2020 saw a sharp correction followed by normalization. Current trends suggest stabilization around 7-8% on average.</span>
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
+            <div class="mb-6 max-w-4xl">
+                <h3 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <span class="text-orange-500 text-3xl">📊</span> Organizational Performance Distribution
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    Appraisals often follow a relative normalization curve (forced ranking) to distribute budget allocations effectively. This model illustrates the typical distribution of employees across the four performance bands within a given cycle. Securing Band A places you in the top decile of performers.
+                </p>
+            </div>
+            <div id="distributionPlot" class="plotly-container"></div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm px-6">
+        <div class="max-w-4xl mx-auto flex flex-col items-center">
+            <div class="text-2xl mb-4">🏢</div>
+            <p class="mb-2 uppercase tracking-widest font-bold text-slate-300">Methodology & Variables</p>
+            <p class="leading-relaxed max-w-2xl mx-auto">
+                Projections are based on standard industry approximations for mid-level technical roles (C1/C2 grade). Actual hike percentages are subject to absolute business unit performance, individual project billing status, geographic location, and organizational fiscal policies in effect during the appraisal cycle. Data shown in historical context is aggregated for illustrative trend analysis.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const wrapText = (labels, maxChars = 16) => {
+            return labels.map(label => {
+                if (label.length <= maxChars) return label;
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > maxChars) {
+                        if (currentLine.trim() !== '') lines.push(currentLine.trim());
+                        currentLine = word + ' ';
+                    } else {
+                        currentLine += word + ' ';
+                    }
+                });
+                if (currentLine.trim() !== '') lines.push(currentLine.trim());
+                return lines;
+            });
+        };
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const baseLPA = 7.58;
+        const projections = [
+            baseLPA * 1.12, 
+            baseLPA * 1.08, 
+            baseLPA * 1.04, 
+            baseLPA * 1.00  
+        ];
+
+        const rawProjLabels = [
+            "Band A (Exceptional ~12%)", 
+            "Band B (Exceeds ~8%)", 
+            "Band C (Meets ~4%)", 
+            "Band D (Action ~0%)"
+        ];
+        const projLabels = wrapText(rawProjLabels);
+
+        const ctxProj = document.getElementById('projectionChart').getContext('2d');
+        new Chart(ctxProj, {
+            type: 'bar',
+            data: {
+                labels: projLabels,
+                datasets: [{
+                    label: 'Projected LPA',
+                    data: projections,
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.9)', 
+                        'rgba(59, 130, 246, 0.9)', 
+                        'rgba(245, 158, 11, 0.9)', 
+                        'rgba(239, 68, 68, 0.9)'   
+                    ],
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 7.00,
+                        title: {
+                            display: true,
+                            text: 'Salary (LPA)',
+                            font: { weight: 'bold' }
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '₹' + value.toFixed(2);
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            maxRotation: 0,
+                            minRotation: 0,
+                            font: { size: 11 }
+                        }
+                    }
+                }
+            }
+        });
+
+        const histYears = ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"];
+        const histData = [8.5, 8.0, 7.0, 8.0, 8.5, 5.0, 10.5, 10.0, 7.5, 7.0];
+        
+        const ctxHist = document.getElementById('historicalChart').getContext('2d');
+        new Chart(ctxHist, {
+            type: 'line',
+            data: {
+                labels: histYears,
+                datasets: [{
+                    label: 'Average Hike %',
+                    data: histData,
+                    borderColor: '#f97316',
+                    backgroundColor: 'rgba(249, 115, 22, 0.15)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#ea580c',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Hike Percentage (%)',
+                            font: { weight: 'bold' }
+                        },
+                        ticks: {
+                            callback: function(value) { return value + '%'; }
+                        }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        const distLabels = ["Band D (Needs Improvement)", "Band C (Meets Expectations)", "Band B (Exceeds Expectations)", "Band A (Exceptional)"];
+        const distValues = [5, 45, 40, 10]; 
+
+        const trace = {
+            x: distLabels,
+            y: distValues,
+            type: 'scattergl',
+            mode: 'lines+markers',
+            line: {
+                shape: 'spline',
+                color: '#1d4ed8',
+                width: 4
+            },
+            marker: {
+                size: 12,
+                color: ['#ef4444', '#f59e0b', '#3b82f6', '#10b981'],
+                line: {
+                    color: '#ffffff',
+                    width: 2
+                }
+            },
+            fill: 'tozeroy',
+            fillcolor: 'rgba(29, 78, 216, 0.1)'
+        };
+
+        const layout = {
+            margin: { t: 20, r: 20, b: 60, l: 60 },
+            xaxis: {
+                showgrid: false,
+                tickfont: { size: 12, color: '#475569' }
+            },
+            yaxis: {
+                title: 'Percentage of Workforce (%)',
+                showgrid: true,
+                gridcolor: '#e2e8f0',
+                zeroline: false,
+                tickfont: { color: '#475569' },
+                ticksuffix: '%'
+            },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            hovermode: 'closest',
+            dragmode: false
+        };
+
+        const config = {
+            displayModeBar: false,
+            responsive: true
+        };
+
+        Plotly.newPlot('distributionPlot', [trace], layout, config);
+    </script>
+</body>
+</html>
